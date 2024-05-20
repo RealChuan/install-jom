@@ -1,0 +1,12 @@
+name: 'Install jom'
+description: 'Install jom on windows'
+author: 'https://github.com/RealChuan/install-jom'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install vcpkg on windows
+      if: startsWith(runner.os, 'Windows')
+      shell: pwsh
+      run: |
+        ${{ github.action_path }}/windows/Install-Jom.ps1

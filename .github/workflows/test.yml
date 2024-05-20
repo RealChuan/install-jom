@@ -1,0 +1,31 @@
+name: Test
+
+on: 
+  push:
+    paths-ignore: 
+        - '.gitignore'
+        - 'LICENSE'
+        - 'README*'
+  pull_request:
+    paths-ignore: 
+        - '.gitignore'
+        - 'LICENSE'
+        - 'README*'
+
+jobs:
+  build:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, windows-2019]
+
+    steps:
+      - uses: RealChuan/install-jom@main
+
+      - name: Check jom version
+        if: startsWith(runner.os, 'Windows')
+        shell: pwsh
+        run: |
+          Get-Command jom

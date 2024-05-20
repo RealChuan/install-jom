@@ -5,7 +5,11 @@ author: 'https://github.com/RealChuan/install-jom'
 runs:
   using: 'composite'
   steps:
-    - name: Install vcpkg on windows
+    - name: Setup Node.js
+      if: startsWith(runner.os, 'Windows')
+      uses: actions/setup-node@v4
+
+    - name: Install jom on windows
       if: startsWith(runner.os, 'Windows')
       shell: pwsh
       run: |

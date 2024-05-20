@@ -28,4 +28,5 @@ jobs:
         if: startsWith(runner.os, 'Windows')
         shell: pwsh
         run: |
+          jom /VERSION
           Get-Command jom

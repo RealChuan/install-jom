@@ -19,6 +19,9 @@ outputs:
   jom-version:
     description: 'Version of installed JOM'
     value: ${{ steps.install-jom.outputs.jom-version }}
+  jom-skipped:
+    description: 'Whether JOM installation was skipped'
+    value: ${{ steps.install-jom.outputs.jom-skipped }}
 
 runs:
   using: 'node20'

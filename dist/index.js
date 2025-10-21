@@ -41091,7 +41091,16 @@ async function run() {
     try {
         // 验证平台
         if (process.platform !== 'win32') {
-            core.setFailed('JOM is only supported on Windows platforms');
+            core.warning('JOM is only supported on Windows platforms. Skipping JOM setup.');
+            core.info('This is expected behavior - JOM is a Windows-specific build tool.');
+            core.info('The workflow will continue without JOM installation.');
+
+            // 设置空的输出值，避免后续步骤因缺少输出而失败
+            core.setOutput('jom-path', '');
+            core.setOutput('jom-version', '');
+            core.setOutput('jom-skipped', 'true');
+
+            core.info('✓ JOM setup skipped (non-Windows platform)');
             return;
         }
 
@@ -41142,6 +41151,7 @@ async function run() {
                         core.addPath(installPath);
                         core.setOutput('jom-path', installPath);
                         core.setOutput('jom-version', jomVersion);
+                        core.setOutput('jom-skipped', 'false');
 
                         core.info('✓ JOM setup completed successfully (from cache)');
                         return;
@@ -41211,6 +41221,7 @@ async function run() {
         // 设置输出
         core.setOutput('jom-path', installPath);
         core.setOutput('jom-version', jomVersion);
+        core.setOutput('jom-skipped', 'false');
 
         core.info('✓ JOM setup completed successfully');
 

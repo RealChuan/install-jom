@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2025, windows-2022]
+        os: [windows-2025, windows-2022, ubuntu-latest, macos-latest]
 
     steps:   
       - name: Install JOM
@@ -28,6 +28,7 @@ jobs:
           cache-enabled: true
       
       - name: Test JOM
+        if: runner.os == 'Windows'
         shell: pwsh
         run: |
           jom /version

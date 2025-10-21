@@ -1,0 +1,35 @@
+name: Test JOM Installation
+
+on: 
+  push:
+    paths-ignore: 
+        - '.gitignore'
+        - 'LICENSE'
+        - 'README*'
+  pull_request:
+    paths-ignore: 
+        - '.gitignore'
+        - 'LICENSE'
+        - 'README*'
+
+jobs:
+  test-jom:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2025, windows-2022]
+
+    steps:   
+      - name: Install JOM
+        uses: RealChuan/install-jom@main
+        with:
+          install-path: 'C:\tools\jom'
+          cache-enabled: true
+      
+      - name: Test JOM
+        shell: pwsh
+        run: |
+          jom /version
+          echo "JOM is ready to use!"
+          

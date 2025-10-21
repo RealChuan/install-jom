@@ -1,16 +1,26 @@
 name: 'Install jom'
-description: 'Install jom on windows'
+description: 'Install jom on Windows systems'
 author: 'https://github.com/RealChuan/install-jom'
 
-runs:
-  using: 'composite'
-  steps:
-    - name: Setup Node.js
-      if: startsWith(runner.os, 'Windows')
-      uses: actions/setup-node@v4
+inputs:
+  install-path:
+    description: 'Installation path for JOM'
+    required: false
+    default: 'C:\jom'
+  cache-enabled:
+    description: 'Enable caching of JOM installation'
+    required: false
+    default: 'true'
 
-    - name: Install jom on windows
-      if: startsWith(runner.os, 'Windows')
-      shell: pwsh
-      run: |
-        ${{ github.action_path }}/windows/Install-Jom.ps1
+outputs:
+  jom-path:
+    description: 'Path where JOM is installed'
+    value: ${{ steps.install-jom.outputs.jom-path }}
+  jom-version:
+    description: 'Version of installed JOM'
+    value: ${{ steps.install-jom.outputs.jom-version }}
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+  

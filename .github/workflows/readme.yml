@@ -1,0 +1,24 @@
+name: Translate README
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - README.md
+
+permissions:
+  contents: write
+
+jobs:
+  Translate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+      # ISO Langusge Codes: https://cloud.google.com/translate/docs/languages  
+      - name: Adding README - English
+        uses: dephraiim/translate-readme@main
+        with:
+          LANG: en

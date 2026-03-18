@@ -1,29 +1,28 @@
-name: 'Install jom'
-description: 'Install jom on Windows systems'
-author: 'https://github.com/RealChuan/install-jom'
+name: "Install jom"
+description: "Install jom on Windows systems"
+author: "https://github.com/RealChuan/install-jom"
 
 inputs:
   install-path:
-    description: 'Installation path for JOM'
+    description: "Installation path for JOM"
     required: false
     default: 'C:\jom'
   cache-enabled:
-    description: 'Enable caching of JOM installation'
+    description: "Enable caching of JOM installation"
     required: false
-    default: 'true'
+    default: "true"
 
 outputs:
   jom-path:
-    description: 'Path where JOM is installed'
+    description: "Path where JOM is installed"
     value: ${{ steps.install-jom.outputs.jom-path }}
   jom-version:
-    description: 'Version of installed JOM'
+    description: "Version of installed JOM"
     value: ${{ steps.install-jom.outputs.jom-version }}
   jom-skipped:
-    description: 'Whether JOM installation was skipped'
+    description: "Whether JOM installation was skipped"
     value: ${{ steps.install-jom.outputs.jom-skipped }}
 
 runs:
-  using: 'node20'
-  main: 'dist/index.js'
-  
+  using: "node24"
+  main: "dist/index.js"
